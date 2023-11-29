@@ -1,24 +1,129 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { Button } from "./components/Button";
+import { Display } from "./components/Display";
+import { DisplayRest } from "./components/DisplayRest";
+import { DisplayChangeVAlue } from './components/DisplayChangeVAlue';
+
+
+const recetonClick = (startValue: number, setValueInintial: (num: number) => void) => setValueInintial(startValue);
 
 function App() {
+  // const [tasks, setTasks] = useState([
+  //   { id: crypto.randomUUID(), title: "hello", isDone: false },
+  // ]);
+
+  const [maxValue, setMaxValue] = useState(5);
+  const [minValue, setMinValue] = useState(0);
+
+  const [value, setValue] = useState<number>(minValue);
+
+  // React.useEffect(() => {
+  //   let valueLocalstore = localStorage.getItem('valueeee')
+  //   if (valueLocalstore) {
+  //     let newValueLoczlStore = JSON.parse(valueLocalstore)
+  //     setValue(newValueLoczlStore)
+  //   }
+  // }, [])
+
+  // React.useEffect(() => {
+  //   localStorage.setItem('valueeee', JSON.stringify(value))
+  // }, [value])
+
+
+  const chanchValue = () => {
+    if (value < maxValue) {
+      setValue(value + 1);
+    }
+  };
+
+
+  const recetonClickBtn = () => setValue(minValue);
+
+  const disabledInc = value >= maxValue;
+  const disabledRecet = value === minValue;
+
+  const setLocalStoreHendler = () => {
+    localStorage.setItem('value+1', JSON.stringify(value + 1))
+  }
+
+  const clearLocalStoreHendler = () => {
+    localStorage.clear()
+  }
+
+  const removeLocalStoreHendler = () => {
+    localStorage.removeItem('value+1')
+  }
+
+  const getLocalStoreHendler = () => {
+    let valueLocalstore = localStorage.getItem('valueeee')
+    if (valueLocalstore) {
+      let newValueLoczlStore = JSON.parse(valueLocalstore)
+      setValue(newValueLoczlStore)
+    }
+  }
+
+  const changeMaxValueClisar = (setMaxValue: (num: number) => void, maxValue: number) => {
+    setMaxValue(maxValue + 1)
+  }
+
+  const changeMaxValue = () => {
+    if (maxValue >= minValue) {
+      changeMaxValueClisar(setMaxValue, maxValue)
+    }
+  }
+  const changeMinValue = () => {
+    if (minValue < maxValue) {
+      setMinValue(minValue + 1)
+    }
+  }
+  const changeMaxMinValue = (max: number, min: number) => {
+    setMaxValue(max)
+    setMinValue(min)
+    recetonClick(min, setValue)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Display value={value}
+        maxValue={maxValue}
+        minValue={minValue}
+        changeMaxValue={changeMaxValue}
+        changeMinValue={changeMinValue} /> */}
+
+      <DisplayRest
+        recetonClickBtn={recetonClickBtn}
+        chanchValue={chanchValue}
+        disabledInc={disabledInc}
+        disabledRecet={disabledRecet}
+        value={value}
+        maxValue={maxValue} />
+
+      <DisplayChangeVAlue changeMaxMinValue={changeMaxMinValue} />
+
+      {/* <div className="container">
+
+        <button onClick={setLocalStoreHendler}>set</button>
+        <button onClick={getLocalStoreHendler}>get</button>
+        <button onClick={clearLocalStoreHendler}>clear</button>
+        <button onClick={removeLocalStoreHendler}>remove</button>
+        <Button
+          name="inc"
+          classStyle="buttpn-rest"
+          callBAckClick={chanchValue}
+          isDisabled={disabledInc}
+        />
+        <Button
+          name="recet"
+          classStyle="buttpn-recet"
+          callBAckClick={recetonClickBtn}
+          isDisabled={disabledRecet}
+        />
+      </div> */}
+      {/* <div className="container">
+        <input type="checkbox" onChange={() => { }} />
+      </div> */}
     </div>
   );
 }
