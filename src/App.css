@@ -1,3 +1,11 @@
+*{
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+}
+
 .big-container {
   border: 1px solid rgb(216, 241, 241);
   max-width: 350px;
@@ -51,4 +59,22 @@ button:disabled {
 .container span {
   display: flex;
   flex-direction: column;
+}
+
+input{
+  padding: 5px 20px;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 100px;
+  margin: 5px;
+}
+
+.erorr {
+  /* background-color: rgb(85, 38, 77); */
+  border: none;
+  outline: 2px rgb(218, 7, 7) solid;
+}
+
+.erorrtrur {
+  background-color: rgb(195, 195, 236);
 }

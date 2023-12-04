@@ -7,6 +7,7 @@ type DisplayRestPropsType = {
     disabledRecet: boolean
     chanchValue: () => void
     disabledInc: boolean
+    error: boolean
 }
 
 export const DisplayRest: React.FC<DisplayRestPropsType> = ({
@@ -15,31 +16,35 @@ export const DisplayRest: React.FC<DisplayRestPropsType> = ({
     recetonClickBtn,
     disabledRecet,
     chanchValue,
-    disabledInc
+    disabledInc,
+    error
 }) => {
-    console.log('rest' + value)
+    console.log(error)
+
+    const inncorrectValue = <span>Inncorrect Value!</span>
+
     return (
 
-        
-<div className="big-container">
-    <div  className="container">
-        <p className={value === maxValue ? 'value-reset' : 'value'} >
-                {value}
-            </p>
-            <Button
-                name="recet"
-                classStyle="buttpn-recet"
-                callBAckClick={recetonClickBtn}
-                isDisabled={disabledRecet}
-            />
-            <Button
-                name="inc"
-                classStyle="buttpn-rest"
-                callBAckClick={chanchValue}
-                isDisabled={disabledInc}
-            />
+
+        <div className="big-container">
+            <div className="container">
+                <p className={value === maxValue ? 'value-reset' : 'value'} >
+                    {error ? inncorrectValue : value}
+                </p>
+                <Button
+                    name="recet"
+                    classStyle="buttpn-recet"
+                    callBAckClick={recetonClickBtn}
+                    isDisabled={disabledRecet}
+                />
+                <Button
+                    name="inc"
+                    classStyle="buttpn-rest"
+                    callBAckClick={chanchValue}
+                    isDisabled={disabledInc}
+                />
+            </div>
         </div>
-</div>
-            
+
     )
 }

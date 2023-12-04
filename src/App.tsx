@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { Button } from "./components/Button";
-import { Display } from "./components/Display";
 import { DisplayRest } from "./components/DisplayRest";
 import { DisplayChangeVAlue } from './components/DisplayChangeVAlue';
+import { Display } from "./components/Display";
 
 
 const recetonClick = (startValue: number, setValueInintial: (num: number) => void) => setValueInintial(startValue);
@@ -16,6 +14,7 @@ function App() {
 
   const [maxValue, setMaxValue] = useState(5);
   const [minValue, setMinValue] = useState(0);
+  const [error, setError] = useState<boolean>(false)
 
   const [value, setValue] = useState<number>(minValue);
 
@@ -86,11 +85,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Display value={value}
+      <Display value={value}
         maxValue={maxValue}
         minValue={minValue}
         changeMaxValue={changeMaxValue}
-        changeMinValue={changeMinValue} /> */}
+        changeMinValue={changeMinValue} />
 
       <DisplayRest
         recetonClickBtn={recetonClickBtn}
@@ -98,9 +97,16 @@ function App() {
         disabledInc={disabledInc}
         disabledRecet={disabledRecet}
         value={value}
-        maxValue={maxValue} />
+        maxValue={maxValue}
+        error={error} />
 
-      <DisplayChangeVAlue changeMaxMinValue={changeMaxMinValue} />
+      <DisplayChangeVAlue
+        changeMaxMinValue={changeMaxMinValue}
+        error={error}
+        setEror={setError}
+        maxValue={maxValue}
+        minValue={minValue}
+      />
 
       {/* <div className="container">
 
